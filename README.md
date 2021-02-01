@@ -1,9 +1,9 @@
 ## Quikerly - Dispatch Management System
 
-Tech Stack -
-FrontEnd: ReactJS with Libraries
-BackEnd: ExpressJS/NodeJS with Libraries
-Database: MongoDB Atlas
+Tech Stack - <br/>
+FrontEnd: ReactJS with Libraries<br/>
+BackEnd: ExpressJS/NodeJS with Libraries<br/>
+Database: MongoDB Atlas<br/>
 
 
 
