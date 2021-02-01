@@ -1,4 +1,8 @@
-This is the backend portion.
+This is the backend portion.<br/>
 
-Database : MongoDB Atlas
-Backend : ExpressJS/NodeJS
+Database : MongoDB Atlas<br/>
+Backend : ExpressJS/NodeJS<br/>
+
+**Setup Instructions**
+
+*Pending*
