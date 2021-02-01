@@ -2,7 +2,9 @@
 
 Tech Stack -
 FrontEnd: ReactJS with Libraries
-BackEnd:
+BackEnd: ExpressJS/NodeJS with Libraries
+Database: MongoDB Atlas
+
 
 
 ## Setup Instructions - Current Version 0.0.1
