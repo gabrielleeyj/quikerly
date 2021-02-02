@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react";
-import Login from "./components/Login/Login";
+import Login from "./components/LoginView/Login";
 
 function App() {
   return (
