@@ -13,7 +13,7 @@ Database: MongoDB Atlas<br/>
 git clone <repo>
 
 **2. Navigate to Frontend Folder**<br/>
-yarn build / npm build<br/>
+yarn install / npm install<br/>
 
 yarn start / npm start<br/>
 
