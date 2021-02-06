@@ -2,9 +2,16 @@ var express = require("express");
 var router = express.Router();
 
 /* GET ALL orders listing. */
-router.get("/orders", function (req, res, next) {
-	res.send("respond with a resource");
-});
+router.get(
+	"/orders",
+	function (req, res, next) {
+		res.send("respond with a resource", req.body);
+		next();
+	},
+	function (req, res) {
+		res.send("All orders!");
+	}
+);
 
 /* GET order listing. */
 router.get("/orders/:orderId", function (req, res, next) {
