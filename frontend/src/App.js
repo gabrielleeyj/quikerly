@@ -1,4 +1,5 @@
 import "./App.css";
+import LandingPage from "./components/WelcomeView/LandingPage";
 // import SignIn from "./components/LoginView/Login";
 // <SignIn />
 // import Dashboard from "./components/DashboardView/Dashboard";
@@ -21,8 +22,9 @@ function App() {
 						}
 					}}
 				</FirebaseAuthConsumer>
-			</FirebaseAuthProvider> */}
-			<Dashboard />
+			</FirebaseAuthProvider> 
+			<Dashboard />*/}
+			<LandingPage />
 		</div>
 	);
 }
