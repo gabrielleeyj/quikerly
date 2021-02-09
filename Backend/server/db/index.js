@@ -1,22 +1,23 @@
+// Imports
 const express = require("express");
 const cors = require("cors");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 const mongoose = require("mongoose");
+var createError = require("http-errors");
+
+// Routes
 const orderRouter = require("../routes/orders");
 const userRouter = require("../routes/users");
 const indexRouter = require("../routes/index");
-require("dotenv").config();
 
-const app = express();
+// import env config
+require("dotenv").config();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.json());
-app.use("/orders", orderRouter);
-app.use("/users", userRouter);
-app.use("/", indexRouter);
-
+// mongodb connection settings
 const uri = process.env.URI;
-
 mongoose
 	.connect(uri, {
 		useNewUrlParser: true, // prevent deprecation warnings
@@ -26,16 +27,28 @@ mongoose
 		serverSelectionTimeoutMS: 5000, // set timeout in milliseconds
 	})
 	.then(() => {
+		// initialize express
+		const app = express();
+
+		app.use(logger("dev"));
+		app.use(cors());
+		app.use(express.json());
+		app.use(cookieParser());
+
+		// routes
+		app.use("/orders", orderRouter);
+		app.use("/users", userRouter);
+		app.use("/", indexRouter);
 		console.log("Connected to MongoDB");
+
+		// start express backend server
+		app.listen(port, () => {
+			console.log(`Server is running on port: ${port}`);
+		});
 	})
 	.catch((e) => {
 		console.error("Connection error: ", e.message);
 	});
 
 const db = mongoose.connection;
-
 module.exports = db;
-
-app.listen(port, () => {
-	console.log(`Server is running on port: ${port}`);
-});

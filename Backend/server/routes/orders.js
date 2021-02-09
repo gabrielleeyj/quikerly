@@ -3,23 +3,10 @@ const router = express.Router();
 const { Orders, Users } = require("../models/orders");
 
 /* GET ALL orders listing. */
-router.get(
-	"/orders",
-	function (err, req, res, next) {
-		if (err.name === "ValidationError") {
-			err.statusCode = 400;
-		}
-		if (err.name === "MongoError") {
-			err.statusCode = 422;
-			err.message = "Duplicate Title Error.";
-		}
-		next();
-	},
-	function (req, res, next) {
-		const orderCollection = Orders.find();
-		req.status(200).send(orderCollection);
-	}
-);
+router.get("/orders", async (req, res) => {
+	const orderCollection = await Orders.find();
+	res.send(orderCollection);
+});
 
 /* GET order listing. */
 router.get("/orders/:orderId", function (req, res, next) {
