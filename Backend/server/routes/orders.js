@@ -1,15 +1,23 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const { Orders, Users } = require("../models/orders");
 
 /* GET ALL orders listing. */
 router.get(
 	"/orders",
-	function (req, res, next) {
-		res.send("respond with a resource", req.body);
+	function (err, req, res, next) {
+		if (err.name === "ValidationError") {
+			err.statusCode = 400;
+		}
+		if (err.name === "MongoError") {
+			err.statusCode = 422;
+			err.message = "Duplicate Title Error.";
+		}
 		next();
 	},
-	function (req, res) {
-		res.send("All orders!");
+	function (req, res, next) {
+		const orderCollection = Orders.find();
+		req.status(200).send(orderCollection);
 	}
 );
 
