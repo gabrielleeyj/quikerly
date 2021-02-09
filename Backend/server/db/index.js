@@ -1,11 +1,10 @@
 // Imports
 const express = require("express");
 const cors = require("cors");
-var path = require("path");
-var cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+
 var logger = require("morgan");
 const mongoose = require("mongoose");
-var createError = require("http-errors");
 
 // Routes
 const orderRouter = require("../routes/orders");
@@ -27,19 +26,23 @@ mongoose
 		serverSelectionTimeoutMS: 5000, // set timeout in milliseconds
 	})
 	.then(() => {
+		// console.log("Connected to MongoDB");
+
 		// initialize express
 		const app = express();
 
 		app.use(logger("dev"));
 		app.use(cors());
 		app.use(express.json());
-		app.use(cookieParser());
+		// bodyParser, parses the request body to be a readable json format
+		app.use(bodyParser.urlencoded({ extended: false }));
+		app.use(bodyParser.json());
 
 		// routes
-		app.use("/orders", orderRouter);
+		app.get("/orders", orderRouter);
+		app.post("/orders", orderRouter);
 		app.use("/users", userRouter);
 		app.use("/", indexRouter);
-		console.log("Connected to MongoDB");
 
 		// start express backend server
 		app.listen(port, () => {
@@ -51,4 +54,8 @@ mongoose
 	});
 
 const db = mongoose.connection;
+db.once("open", () => console.log("Connected to the database"));
+// checks if connection with the database is successful
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
 module.exports = db;

@@ -36,11 +36,7 @@ const orderSchema = new mongoose.Schema(
 			trim: true,
 			lowercase: true,
 		},
-		user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-		timestamp: {
-			type: Date,
-			default: Date.now,
-		},
+		user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 		recipient: {
 			firstName: String,
 			lastName: String,
@@ -83,6 +79,6 @@ const userSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const Orders = mongoose.model("Orders", orderSchema);
-const Users = mongoose.model("Users", userSchema);
+const Orders = mongoose.model("orders", orderSchema);
+const Users = mongoose.model("users", userSchema);
 module.exports = { Users, Orders };
