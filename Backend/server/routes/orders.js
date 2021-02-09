@@ -1,9 +1,11 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const { Orders, Users } = require("../models/orders");
 
 /* GET ALL orders listing. */
-router.get("/orders", function (req, res, next) {
-	res.send("respond with a resource");
+router.get("/orders", async (req, res) => {
+	const orderCollection = await Orders.find();
+	res.send(orderCollection);
 });
 
 /* GET order listing. */
