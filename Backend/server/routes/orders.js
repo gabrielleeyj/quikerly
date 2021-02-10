@@ -33,21 +33,34 @@ router.delete("/orders/:orderId", async (req, res) => {
 		res.status(204).send();
 	} catch {
 		res.status(404);
-		res.send({ error: "Post doesn't exist!" });
+		res.send({ error: "Order doesn't exist!" });
 	}
 });
 
 /* CREATE order */
 router.post("/orders", async (req, res) => {
+	const {
+		delivery_order,
+		user,
+		recipient,
+		instructions,
+		pickupTime,
+		cost,
+		driver,
+		status,
+		timestamps,
+	} = req.body;
 	try {
 		const order = new Order({
-			delivery_order: req.body.delivery_order,
-			user: req.body.user,
-			recipient: req.body.recipient,
-			pickupTime: req.body.pickupTime,
-			cost: req.body.cost,
-			driver: req.body.driver,
-			status: req.body.status,
+			delivery_order,
+			user,
+			recipient,
+			instructions,
+			pickupTime,
+			cost,
+			driver,
+			status,
+			timestamps,
 		});
 		await order.save();
 		res.send(order);
