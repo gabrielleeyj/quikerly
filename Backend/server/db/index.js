@@ -1,12 +1,15 @@
-// Imports
+// Import express modules
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+// debugger for server
 var logger = require("morgan");
+
+// import mongoose module
 const mongoose = require("mongoose");
 
-// Routes
+// Import Routes
 const orderRouter = require("../routes/orders");
 const userRouter = require("../routes/users");
 const indexRouter = require("../routes/index");
@@ -26,7 +29,7 @@ mongoose
 		serverSelectionTimeoutMS: 5000, // set timeout in milliseconds
 	})
 	.then(() => {
-		// console.log("Connected to MongoDB");
+		console.log("Connected to MongoDB");
 
 		// initialize express
 		const app = express();
@@ -38,10 +41,16 @@ mongoose
 		app.use(bodyParser.urlencoded({ extended: false }));
 		app.use(bodyParser.json());
 
-		// routes
+		// routes - orders
 		app.get("/orders", orderRouter);
 		app.post("/orders", orderRouter);
+		app.delete("/orders/:orderId", orderRouter);
+		app.patch("orders/:orderId", orderRouter);
+
+		// routes - users
 		app.use("/users", userRouter);
+
+		// routes - index
 		app.use("/", indexRouter);
 
 		// start express backend server
@@ -52,10 +61,5 @@ mongoose
 	.catch((e) => {
 		console.error("Connection error: ", e.message);
 	});
-
-const db = mongoose.connection;
-db.once("open", () => console.log("Connected to the database"));
-// checks if connection with the database is successful
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 module.exports = db;
