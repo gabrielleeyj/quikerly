@@ -1,8 +1,8 @@
 {
   "name": "mongodb-atlas",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Quikerly Backend Service",
-  "main": "./server/db/index.js",
+  "main": "./server/server.js",
   "private": true,
   "scripts": {
     "start": "node ."

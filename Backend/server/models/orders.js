@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema(
 			trim: true,
 			lowercase: true,
 		},
-		user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+		user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
 		recipient: {
 			firstName: String,
 			lastName: String,
@@ -53,9 +53,38 @@ const orderSchema = new mongoose.Schema(
 			required: true,
 		},
 	},
-	{ timestamps: true }
+	{ timestamps: true },
+	{ collection: "users" }
 );
 
+// User Schema is based on this model
+// user: {
+// 	customer: {
+//      userName: "",
+//      email: "",
+// 		firstName: "",
+// 		lastName: "",
+// 		pickupAddress: "",
+// 		pickupPostal: "",
+// 	}
+// }
+
+const userSchema = new mongoose.Schema(
+	{
+		user: {
+			userName: { type: String, required: true, unique: true },
+			email: { type: String, required: true },
+			firstName: String,
+			lastName: String,
+			pickupAddress: String,
+			pickupPostal: Number,
+		},
+	},
+	{ timestamps: true },
+	{ collection: "users" }
+);
+
+const Users = mongoose.model("users", userSchema);
 const Orders = mongoose.model("orders", orderSchema);
 
-module.exports = Orders;
+module.exports = { Orders, Users };
