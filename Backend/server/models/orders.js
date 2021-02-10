@@ -19,15 +19,6 @@ const mongoose = require("mongoose");
 // 	status: "",
 // }
 
-// user: {
-// 	customer: {
-// 		firstName: "",
-// 		lastName: "",
-// 		pickupAddress: "",
-// 		pickupPostal: "",
-// 	}
-// }
-
 const orderSchema = new mongoose.Schema(
 	{
 		delivery_order: {
@@ -65,20 +56,6 @@ const orderSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const userSchema = new mongoose.Schema(
-	{
-		user: {
-			userName: { type: String, required: true, unique: true },
-			email: { type: String, required: true },
-			firstName: String,
-			lastName: String,
-			pickupAddress: String,
-			pickupPostal: Number,
-		},
-	},
-	{ timestamps: true }
-);
-
 const Orders = mongoose.model("orders", orderSchema);
-const Users = mongoose.model("users", userSchema);
-module.exports = { Users, Orders };
+
+module.exports = Orders;
