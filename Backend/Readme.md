@@ -8,4 +8,4 @@ Backend : ExpressJS/NodeJS<br/>
 To start the server, **npm run start**.<br/>
 
 **Currently pending authentication build**<br/>
-Authentication will be via Firebase Auth0.
+Authentication will handled by Firebase Auth0.
