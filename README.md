@@ -1,7 +1,7 @@
 ## Quikerly - Dispatch Management System
 
-[Progress Report](https://www.notion.so/86e64edc90c44900ab926c68435ef4cd?v=a443bc9b029941eba3daefbf38726dc4)<br/>
-[Documentation](https://www.notion.so/01f5e6cf3f054869955b6fcc8a7de57d?v=93063432a861438a80736ebacff62a76)<br/>
+[![Generic badge](https://img.shields.io/badge/progress-Live-Green.svg)](https://www.notion.so/86e64edc90c44900ab926c68435ef4cd?v=a443bc9b029941eba3daefbf38726dc4) &nbsp;[![Dependecy Status](https://david-dm.org/tterb/Hyde.svg)](https://david-dm.org/tterb/Hyde)&nbsp;
+[![Read the Docs](https://readthedocs.org/projects/docs/badge/?version=latest)](https://www.notion.so/01f5e6cf3f054869955b6fcc8a7de57d?v=93063432a861438a80736ebacff62a76)<br/>
 
 Tech Stack - <br/>
 FrontEnd: ReactJS with Libraries<br/>
