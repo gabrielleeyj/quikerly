@@ -1,5 +1,8 @@
 ## Quikerly - Dispatch Management System
 
+[Progress Report](https://www.notion.so/86e64edc90c44900ab926c68435ef4cd?v=a443bc9b029941eba3daefbf38726dc4)
+[Documentation](https://www.notion.so/01f5e6cf3f054869955b6fcc8a7de57d?v=93063432a861438a80736ebacff62a76)
+
 Tech Stack - <br/>
 FrontEnd: ReactJS with Libraries<br/>
 BackEnd: ExpressJS/NodeJS with Libraries<br/>
