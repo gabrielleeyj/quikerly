@@ -1,24 +1,21 @@
 import React from 'react';
+import { ReactComponent as Logo } from "../components/logo.svg";
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import { withStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   title: {
-    fontSize: 24,
+    display: 'block',
+    fontSize: 2,
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
     justifyContent: 'space-between',
-  },
-  left: {
-    flex: 1,
-  },
-  leftLinkActive: {
-    color: theme.palette.common.white,
   },
   right: {
     flex: 1,
@@ -31,7 +28,7 @@ const styles = (theme) => ({
     marginLeft: theme.spacing(3),
   },
   linkSecondary: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.common.white,
   },
 });
 
@@ -40,39 +37,39 @@ function AppAppBar(props) {
 
   return (
     <div>
-      <AppBar position="fixed" style={{backgroundColor:"#ff7f7f"}}>
+      <AppBar position="fixed" style={{backgroundColor:"#434d4f"}}>
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
           <Link
             variant="h6"
             underline="none"
             color="inherit"
             className={classes.title}
-            href="/premium-themes/onepirate/"
+            href="/"
           >
-            {'quikerly'}
+           {<Logo />}
           </Link>
           <div className={classes.right}>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
+            <Button 
+              variant="outlined" 
+              color="inherit" 
+              size="medium"
               className={classes.rightLink}
-              href="/premium-themes/onepirate/sign-in/"
-            >
-              {'Sign In'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
+              href="/sign-in">
+              Sign In
+            </Button>
+            <Button 
+              variant="contained" 
+              color="secondary" 
+              disableElevation
+              size="medium"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/premium-themes/onepirate/sign-up/"
-            >
-              {'Sign Up'}
-            </Link>
+              href="/sign-up">
+              Sign Up
+            </Button>
           </div>
         </Toolbar>
       </AppBar>
+                
       <div className={classes.placeholder} />
     </div>
   );

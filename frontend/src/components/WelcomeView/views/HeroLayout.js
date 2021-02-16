@@ -30,7 +30,7 @@ const styles = (theme) => ({
     top: 0,
     bottom: 0,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.5,
+    opacity: 0.3,
     zIndex: -1,
   },
   background: {
@@ -55,22 +55,9 @@ function HeroLayout(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="#"
-          alt="wonder"
-          width="147"
-          height="80"
-        />
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        <img
-          className={classes.arrowDown}
-          src="#"
-          height="16"
-          width="12"
-          alt="arrow down"
-        />
       </Container>
     </section>
   );

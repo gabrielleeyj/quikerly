@@ -5,4 +5,7 @@ Backend : ExpressJS/NodeJS<br/>
 
 **Setup Instructions**
 
-*Pending*
+To start the server, **npm run start**.<br/>
+
+**Currently pending authentication build**<br/>
+Authentication will handled by Firebase Auth0.
