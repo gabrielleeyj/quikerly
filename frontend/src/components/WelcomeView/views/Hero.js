@@ -6,7 +6,7 @@ import Typography from '../components/Typography';
 import HeroLayout from './HeroLayout';
 
 const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+  'https://images.pexels.com/photos/2303781/pexels-photo-2303781.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260';
 
 const styles = (theme) => ({
   background: {
@@ -37,7 +37,7 @@ function Hero(props) {
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        It's Time You sAve
+        It's Time You Save
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
         Enjoy 50% off your first order with us!
@@ -48,12 +48,12 @@ function Hero(props) {
         size="large"
         className={classes.button}
         component="a"
-        href="/premium-themes/onepirate/sign-up/"
+        href="/sign-up"
       >
         Register
       </Button>
       <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
+        Discover the convenience
       </Typography>
     </HeroLayout>
   );

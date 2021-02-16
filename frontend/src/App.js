@@ -1,8 +1,10 @@
 import "./App.css";
 import LandingPage from "./components/WelcomeView/LandingPage";
-// import SignIn from "./components/LoginView/Login";
-// <SignIn />
-// import Dashboard from "./components/DashboardView/Dashboard";
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import SignUp from './components/WelcomeView/SignUp';
+import SignIn from './components/WelcomeView/SignIn';
+import ForgotPassword from './components/WelcomeView/ForgotPassword'
+import Dashboard from "./components/DashboardView/Dashboard";
 // import config from "./components/Firebase/Config";
 // import {
 // 	FirebaseAuthProvider,
@@ -22,9 +24,16 @@ function App() {
 						}
 					}}
 				</FirebaseAuthConsumer>
-			</FirebaseAuthProvider> 
-			<Dashboard />*/}
-			<LandingPage />
+			</FirebaseAuthProvider>*/} 
+			<Router>
+            <Switch>
+                <Route exact from="/" render={props => <LandingPage {...props} />} />
+                <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
+                <Route exact path="/sign-in" render={props => <SignIn {...props} />} />
+				<Route exact path="/forgot-password" render={props => <ForgotPassword {...props} />} />
+            </Switch>
+            </Router>
+			<Dashboard />
 		</div>
 	);
 }
