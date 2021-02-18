@@ -1,41 +1,27 @@
-import "./App.css";
-import LandingPage from "./components/WelcomeView/LandingPage";
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SignUp from './components/WelcomeView/SignUp';
-import SignIn from './components/WelcomeView/SignIn';
-import ForgotPassword from './components/WelcomeView/ForgotPassword'
-import Dashboard from "./components/DashboardView/Dashboard";
-// import config from "./components/Firebase/Config";
-// import {
-// 	FirebaseAuthProvider,
-// 	FirebaseAuthConsumer,
-// } from "@react-firebase/auth";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import React, { useState } from "react";
+import { useRoutes } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core";
+import GlobalStyles from "./components/GlobalStyles";
+import "./mixins/chartjs";
+import theme from "./theme";
+import routes from "./routes";
+import fire from "./firebase/Config";
 
-function App() {
-	return (
-		<div className="App">
-			{/* <FirebaseAuthProvider {...config} firebase={firebase}>
-				<FirebaseAuthConsumer>
-					{({ isSignedIn }) => {
-						if (isSignedIn === true) {
-							return <Dashboard credentials={credentials} />;
-						} else {
-							return "Invalid User";
-						}
-					}}
-				</FirebaseAuthConsumer>
-			</FirebaseAuthProvider>*/} 
-			<Router>
-            <Switch>
-                <Route exact from="/" render={props => <LandingPage {...props} />} />
-                <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
-                <Route exact path="/sign-in" render={props => <SignIn {...props} />} />
-				<Route exact path="/forgot-password" render={props => <ForgotPassword {...props} />} />
-            </Switch>
-            </Router>
-			<Dashboard />
-		</div>
-	);
-}
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  fire.auth().onAuthStateChanged(user => {
+    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+  const routing = useRoutes(routes(isLoggedIn));
+  console.log("logged in?", isLoggedIn);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      {routing}
+    </ThemeProvider>
+  );
+};
 
 export default App;
