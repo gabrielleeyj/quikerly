@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SignUp from './components/WelcomeView/SignUp';
 import SignIn from './components/WelcomeView/SignIn';
 import ForgotPassword from './components/WelcomeView/ForgotPassword'
-import Dashboard from "./components/DashboardView/Dashboard";
 // import config from "./components/Firebase/Config";
 // import {
 // 	FirebaseAuthProvider,
@@ -33,7 +32,7 @@ function App() {
 				<Route exact path="/forgot-password" render={props => <ForgotPassword {...props} />} />
             </Switch>
             </Router>
-			<Dashboard />
+			
 		</div>
 	);
 }
