@@ -1,39 +1,68 @@
 import "./App.css";
+import React, { useState } from "react";
 import LandingPage from "./components/WelcomeView/LandingPage";
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SignUp from './components/WelcomeView/SignUp';
-import SignIn from './components/WelcomeView/SignIn';
-import ForgotPassword from './components/WelcomeView/ForgotPassword'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignUp from "./components/WelcomeView/SignUp";
+import SignIn from "./components/WelcomeView/SignIn";
+import ForgotPassword from "./components/WelcomeView/ForgotPassword";
 import Dashboard from "./components/DashboardView/Dashboard";
-// import config from "./components/Firebase/Config";
+import Customers from "./components/DashboardView/Customers";
+import Orders from "./components/DashboardView/Orders";
+import Profile from "./components/ProfileView/Profile";
+import fire from "./firebase/Config";
 // import {
 // 	FirebaseAuthProvider,
 // 	FirebaseAuthConsumer,
 // } from "@react-firebase/auth";
 
 function App() {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	fire.auth().onAuthStateChanged((user) => {
+		return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+	});
+
+	console.log("logged in?", isLoggedIn);
+
 	return (
 		<div className="App">
-			{/* <FirebaseAuthProvider {...config} firebase={firebase}>
-				<FirebaseAuthConsumer>
-					{({ isSignedIn }) => {
-						if (isSignedIn === true) {
-							return <Dashboard credentials={credentials} />;
-						} else {
-							return "Invalid User";
-						}
-					}}
-				</FirebaseAuthConsumer>
-			</FirebaseAuthProvider>*/} 
 			<Router>
-            <Switch>
-                <Route exact from="/" render={props => <LandingPage {...props} />} />
-                <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
-                <Route exact path="/sign-in" render={props => <SignIn {...props} />} />
-				<Route exact path="/forgot-password" render={props => <ForgotPassword {...props} />} />
-            </Switch>
-            </Router>
-			<Dashboard />
+				{!isLoggedIn ? (
+					<>
+						<Switch>
+							<Route
+								exact
+								from="/"
+								render={(props) => <LandingPage {...props} />}
+							/>
+							<Route
+								exact
+								path="/sign-up"
+								render={(props) => <SignUp {...props} />}
+							/>
+							<Route
+								exact
+								path="/sign-in"
+								render={(props) => <SignIn {...props} />}
+							/>
+							<Route
+								exact
+								path="/forgot-password"
+								render={(props) => <ForgotPassword {...props} />}
+							/>
+						</Switch>
+					</>
+				) : (
+					<>
+						<Route to="/dashboard" component={Dashboard} />
+						<Switch>
+							<Route path="/dashboard" component={Dashboard} />
+							<Route path="/orders" component={Orders} />
+							<Route path="/customers" component={Customers} />
+							<Route path="/profile:id" component={Profile} />
+						</Switch>
+					</>
+				)}
+			</Router>
 		</div>
 	);
 }

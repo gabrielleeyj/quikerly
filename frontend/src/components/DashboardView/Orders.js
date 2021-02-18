@@ -9,8 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-	return { id, date, name, shipTo, paymentMethod, amount };
+function createData(id, date, name, shipTo, contact, status) {
+	return { id, date, name, shipTo, contact, status };
 }
 
 const rows = [
@@ -19,40 +19,40 @@ const rows = [
 		"16 Mar, 2019",
 		"Elvis Presley",
 		"Tupelo, MS",
-		"VISA ⠀•••• 3719",
-		312.44
+		"87654321",
+		"Pending Pickup"
 	),
 	createData(
 		1,
 		"16 Mar, 2019",
 		"Paul McCartney",
 		"London, UK",
-		"VISA ⠀•••• 2574",
-		866.99
+		"93456789",
+		"In Progress"
 	),
 	createData(
 		2,
 		"16 Mar, 2019",
 		"Tom Scholz",
 		"Boston, MA",
-		"MC ⠀•••• 1253",
-		100.81
+		"81234567",
+		"In Progress"
 	),
 	createData(
 		3,
 		"16 Mar, 2019",
 		"Michael Jackson",
 		"Gary, IN",
-		"AMEX ⠀•••• 2000",
-		654.39
+		"82345678",
+		"Delivered"
 	),
 	createData(
 		4,
 		"15 Mar, 2019",
 		"Bruce Springsteen",
 		"Long Branch, NJ",
-		"VISA ⠀•••• 5919",
-		212.79
+		"91234567",
+		"Delivered"
 	),
 ];
 
@@ -76,9 +76,9 @@ export default function Orders() {
 					<TableRow>
 						<TableCell>Date</TableCell>
 						<TableCell>Name</TableCell>
-						<TableCell>Ship To</TableCell>
-						<TableCell>Payment Method</TableCell>
-						<TableCell align="right">Sale Amount</TableCell>
+						<TableCell>Address</TableCell>
+						<TableCell>Contact</TableCell>
+						<TableCell align="right">Status</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -87,8 +87,8 @@ export default function Orders() {
 							<TableCell>{row.date}</TableCell>
 							<TableCell>{row.name}</TableCell>
 							<TableCell>{row.shipTo}</TableCell>
-							<TableCell>{row.paymentMethod}</TableCell>
-							<TableCell align="right">{row.amount}</TableCell>
+							<TableCell>{row.contact}</TableCell>
+							<TableCell align="right">{row.status}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

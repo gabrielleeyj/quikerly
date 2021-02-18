@@ -14,20 +14,22 @@ const useStyles = makeStyles({
 	},
 });
 
+let [month, date, year] = new Date().toLocaleDateString("en-US").split("/");
+
 export default function Deposits() {
 	const classes = useStyles();
 	return (
 		<React.Fragment>
-			<Title>Recent Deposits</Title>
+			<Title>Total Orders</Title>
 			<Typography component="p" variant="h4">
-				$3,024.00
+				3024
 			</Typography>
 			<Typography color="textSecondary" className={classes.depositContext}>
-				on 15 March, 2019
+				as of {date}/{month}/{year}
 			</Typography>
 			<div>
 				<Link color="primary" href="#" onClick={preventDefault}>
-					View balance
+					View Orders
 				</Link>
 			</div>
 		</React.Fragment>
