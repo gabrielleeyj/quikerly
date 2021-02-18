@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import LandingPage from "./components/WelcomeView/LandingPage";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./components/WelcomeView/SignUp";
 import SignIn from "./components/WelcomeView/SignIn";
 import ForgotPassword from "./components/WelcomeView/ForgotPassword";
@@ -53,7 +53,7 @@ function App() {
 					</>
 				) : (
 					<>
-						<Link to="/dashboard" component={Dashboard} />
+						<Route to="/dashboard" component={Dashboard} />
 						<Switch>
 							<Route path="/dashboard" component={Dashboard} />
 							<Route path="/orders" component={Orders} />
