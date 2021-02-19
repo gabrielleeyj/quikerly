@@ -6,7 +6,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import fire from "../../firebase/Config";
 
@@ -16,45 +16,45 @@ const signOut = () => {
 
 export const mainListItems = (
 	<div>
-		<NavLink to="/dashboard">
+		<Link to="/dashboard">
 			<ListItem button>
 				<ListItemIcon>
 					<DashboardIcon />
 				</ListItemIcon>
 				<ListItemText primary="Dashboard" />
 			</ListItem>
-		</NavLink>
+		</Link>
 
-		<NavLink to="/orders">
+		<Link to="/orders">
 			<ListItem button>
 				<ListItemIcon>
 					<ShoppingCartIcon />
 				</ListItemIcon>
 				<ListItemText primary="Orders" />
 			</ListItem>
-		</NavLink>
+		</Link>
 
-		<NavLink to="/customers">
+		<Link to="/customers">
 			<ListItem button>
 				<ListItemIcon>
 					<PeopleIcon />
 				</ListItemIcon>
 				<ListItemText primary="Customers" />
 			</ListItem>
-		</NavLink>
+		</Link>
 	</div>
 );
 
 export const secondaryListItems = (
 	<div>
-		<NavLink to="/profile">
+		<Link to="/profile">
 			<ListItem button>
 				<ListItemIcon>
 					<AccountCircleIcon />
 				</ListItemIcon>
 				<ListItemText primary="Profile" />
 			</ListItem>
-		</NavLink>
+		</Link>
 		<ListItem button>
 			<ListItemIcon>
 				<ExitToAppIcon onClick={signOut} />
