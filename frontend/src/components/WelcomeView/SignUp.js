@@ -46,7 +46,9 @@ function SignUp() {
 		return errors;
 	};
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		setSent({ Form });
+	};
 
 	return (
 		<React.Fragment>
