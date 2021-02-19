@@ -5,10 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./components/WelcomeView/SignUp";
 import SignIn from "./components/WelcomeView/SignIn";
 import ForgotPassword from "./components/WelcomeView/ForgotPassword";
-import Dashboard from "./components/DashboardView/Dashboard";
-import Customers from "./components/DashboardView/Customers";
-import Orders from "./components/DashboardView/Orders";
-import Profile from "./components/ProfileView/Profile";
+import Index from "./components/DashboardView/Index";
 import fire from "./firebase/Config";
 // import {
 // 	FirebaseAuthProvider,
@@ -29,37 +26,15 @@ function App() {
 				{!isLoggedIn ? (
 					<>
 						<Switch>
-							<Route
-								exact
-								from="/"
-								render={(props) => <LandingPage {...props} />}
-							/>
-							<Route
-								exact
-								path="/sign-up"
-								render={(props) => <SignUp {...props} />}
-							/>
-							<Route
-								exact
-								path="/sign-in"
-								render={(props) => <SignIn {...props} />}
-							/>
-							<Route
-								exact
-								path="/forgot-password"
-								render={(props) => <ForgotPassword {...props} />}
-							/>
+							<Route exact path="/" component={LandingPage} />
+							<Route path="/sign-up" component={SignUp} />
+							<Route path="/sign-in" component={SignIn} />
+							<Route path="/forgot-password" component={ForgotPassword} />
 						</Switch>
 					</>
 				) : (
 					<>
-						<Route to="/dashboard" component={Dashboard} />
-						<Switch>
-							<Route path="/dashboard" component={Dashboard} />
-							<Route path="/orders" component={Orders} />
-							<Route path="/customers" component={Customers} />
-							<Route path="/profile:id" component={Profile} />
-						</Switch>
+						<Route to="/dashboard" component={Index} />
 					</>
 				)}
 			</Router>
