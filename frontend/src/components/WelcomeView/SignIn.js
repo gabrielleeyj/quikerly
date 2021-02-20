@@ -41,14 +41,14 @@ function SignIn() {
 	});
 
 	const handleSubmit = (values) => {
-		if (values) {
-			fire
-				.auth()
-				.signInWithEmailAndPassword(values.email, values.password)
-				.catch((error) => {
-					console.error("Incorrect username or password");
-				});
-			return authenticated(true);
+		const login = fire
+			.auth()
+			.signInWithEmailAndPassword(values.email, values.password)
+			.catch((error) => {
+				console.error("Incorrect username or password");
+			});
+		if (login) {
+			authenticated({ status: true });
 		}
 	};
 
@@ -170,6 +170,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	authenticated: (status) => dispatch(hasAuthenticated(status)),
+	setAuthenticated: (status) => dispatch(authenticated(status)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

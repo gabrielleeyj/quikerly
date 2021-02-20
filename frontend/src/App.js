@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import fire from "./firebase/Config";
-import { hasAuthenticated } from "./reducers/auth";
+import { authenticated, hasAuthenticated } from "./reducers/auth";
 import Routes from "./router";
 
 function App() {
@@ -11,10 +11,10 @@ function App() {
 		if (!user) {
 			console.log("not logged in", user);
 		}
-		hasAuthenticated({ status: true }) && setIsLoggedIn(true);
+		setIsLoggedIn(true);
 	});
 
-	return isLoggedIn && <Routes />;
+	return isLoggedIn && <Routes authenticated={authenticated} />;
 }
 
 const mapStateToProps = (state) => ({
