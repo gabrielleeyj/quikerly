@@ -6,7 +6,7 @@ export const AUTHENTICATED = "AUTHENTICATED";
 export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
 
 const initialState = {
-	authenticated: undefined,
+	authenticated: false,
 };
 
 // Reducer
