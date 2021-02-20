@@ -6,6 +6,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
 import Title from "./Title";
 
 // Generate Order Data
@@ -70,6 +71,9 @@ export default function Orders() {
 	const classes = useStyles();
 	return (
 		<React.Fragment>
+			<Button variant="contained" color="primary">
+				ADD ORDER
+			</Button>
 			<Title>Recent Orders</Title>
 			<Table size="small">
 				<TableHead>

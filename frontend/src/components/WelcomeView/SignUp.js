@@ -1,5 +1,3 @@
-import withRoot from "./withRoot";
-// --- Post bootstrap -----
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -178,4 +176,4 @@ function SignUp() {
 	);
 }
 
-export default withRoot(SignUp);
+export default SignUp;

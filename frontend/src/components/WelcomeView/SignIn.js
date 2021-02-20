@@ -1,5 +1,5 @@
-import withRoot from "./withRoot";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Field, Form, FormSpy } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
@@ -18,6 +18,7 @@ import FormFeedback from "./form/FormFeedback";
 // import Visibility from "@material-ui/icons/Visibility";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import fire from "../../firebase/Config";
+import { authenticated, hasAuthenticated } from "../../reducers/auth";
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -40,12 +41,15 @@ function SignIn() {
 	});
 
 	const handleSubmit = (values) => {
-		fire
-			.auth()
-			.signInWithEmailAndPassword(values.email, values.password)
-			.catch((error) => {
-				console.error("Incorrect username or password");
-			});
+		if (values) {
+			fire
+				.auth()
+				.signInWithEmailAndPassword(values.email, values.password)
+				.catch((error) => {
+					console.error("Incorrect username or password");
+				});
+			return authenticated(true);
+		}
 	};
 
 	const handleChange = (prop) => (event) => {
@@ -161,4 +165,11 @@ function SignIn() {
 	);
 }
 
-export default withRoot(SignIn);
+const mapStateToProps = (state) => ({
+	authenticated: hasAuthenticated(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	authenticated: (status) => dispatch(hasAuthenticated(status)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
