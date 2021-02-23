@@ -2,6 +2,7 @@ import withRoot from "./withRoot";
 // --- Post bootstrap -----
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { Field, Form, FormSpy } from "react-final-form";
 import Typography from "./components/Typography";
@@ -68,6 +69,47 @@ function SignUp() {
 				>
 					{({ handleSubmit, submitting }) => (
 						<form onSubmit={handleSubmit} className={classes.form} noValidate>
+							<Grid container spacing={2}>
+								<Grid item xs={12} sm={6}>
+									<Field
+										autoFocus
+										component={RFTextField}
+										autoComplete="fname"
+										fullWidth
+										label="First name"
+										name="firstName"
+										required
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<Field
+										component={RFTextField}
+										autoComplete="lname"
+										fullWidth
+										label="Last name"
+										name="lastName"
+										required
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<Field
+										component={RFTextField}
+										fullWidth
+										label="Name Of Company"
+										name="company"
+										required
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<Field
+										component={RFTextField}
+										fullWidth
+										label="Contact Number"
+										name="contact"
+										required
+									/>
+								</Grid>
+							</Grid>
 							<Field
 								autoComplete="email"
 								component={RFTextField}
@@ -79,13 +121,13 @@ function SignUp() {
 								required
 							/>
 							<Field
-								autoComplete="current-password"
+								autoComplete="address"
 								component={RFTextField}
 								disabled={submitting || sent}
 								fullWidth
-								label="Set Password"
+								label="Pick Up Address"
 								margin="normal"
-								name="password"
+								name="address"
 								required
 							/>
 							<Field
@@ -94,7 +136,8 @@ function SignUp() {
 								disabled={submitting || sent}
 								required
 								name="password"
-								label="Confirm Password"
+								autoComplete="current-password"
+								label="Password"
 								type="password"
 								margin="normal"
 							/>
@@ -123,7 +166,7 @@ function SignUp() {
 								color="primary light"
 								fullWidth
 							>
-								{submitting || sent ? "In progress…" : "Sign Up with Google"}
+								{submitting || sent ? "In progress…" : "Sign in with Google"}
 							</FormButton>
 						</form>
 					)}

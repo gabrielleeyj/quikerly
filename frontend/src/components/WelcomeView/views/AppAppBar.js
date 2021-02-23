@@ -10,9 +10,12 @@ import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   title: {
-    display: 'block',
-    fontSize: 2,
+    flex: 1.3,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing(1),
   },
+
   placeholder: toolbarStyles(theme).root,
   toolbar: {
     justifyContent: 'space-between',
@@ -24,7 +27,7 @@ const styles = (theme) => ({
   },
   rightLink: {
     fontSize: 16,
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
     marginLeft: theme.spacing(3),
   },
   linkSecondary: {
@@ -37,7 +40,7 @@ function AppAppBar(props) {
 
   return (
     <div>
-      <AppBar position="fixed" style={{backgroundColor:"#434d4f"}}>
+      <AppBar position="fixed" style={{backgroundColor:"#fff"}}>
         <Toolbar className={classes.toolbar}>
           <Link
             variant="h6"

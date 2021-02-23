@@ -6,7 +6,7 @@ import Typography from '../components/Typography';
 import HeroLayout from './HeroLayout';
 
 const backgroundImage =
-  'https://images.pexels.com/photos/2303781/pexels-photo-2303781.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260';
+  'https://images.pexels.com/photos/5945559/pexels-photo-5945559.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260';
 
 const styles = (theme) => ({
   background: {
@@ -37,7 +37,7 @@ function Hero(props) {
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        It's Time You Save
+        believe in freshness delivered
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
         Enjoy 50% off your first order with us!
