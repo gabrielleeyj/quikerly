@@ -99,11 +99,6 @@ const GeneralToolbar = (props) => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    window.addEventListener('beforeunload', (e) => {
-        e.preventDefault();
-        props.signOut()
-        e.returnValue = ''
-    });
 
     return (
         <div className={classes.root}>
