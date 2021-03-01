@@ -4,28 +4,41 @@ import date from 'date-and-time'
 export const orderCreate = (data) => {
     return (dispatch, getState) => {
         const userData = getState().auth.userData;
-        const ord = getState().order.orders
-        const num = parseInt(ord[ord.length - 1].deliveryOrderNumber) + 1
-        let current = new Date().toISOString();
-        current = date.transform(current.slice(0, 10).replaceAll('-', '/'), 'YYYY/MM/DD', 'DD/MM/YYYY')
-        const orderData = {
-            ...data,
-            orderDate: current,
-            userEmail: userData.userEmail,
-            userAddress: userData.userAddress,
-            userContact: userData.userContact,
-            userPostalCode: userData.userPostalCode,
-            userName: userData.userName
-        }
-        axios.post('http://localhost:3002/api/orders', orderData)
-            .then((res) => {
-                let updatedOrders = getState().order.orders
-                updatedOrders = [{ ...orderData, deliveryOrderNumber: num }].concat(updatedOrders)
-                dispatch({ type: 'ORDER_CREATE_SUCCESS', orders: updatedOrders })
+        axios.get('http://localhost:3002/api/orders')
+            .then(res => {
+                const ordersList = res.data
+                let num;
+                if (ordersList.length < 1) {
+                    num = 1
+                }
+                else {
+                    num = parseInt(ordersList[ordersList.length - 1].deliveryOrderNumber) + 1
+                }
+                let current = new Date().toISOString();
+                current = date.transform(current.slice(0, 10).replaceAll('-', '/'), 'YYYY/MM/DD', 'DD/MM/YYYY')
+                const orderData = {
+                    ...data,
+                    orderDate: current,
+                    userEmail: userData.userEmail,
+                    userAddress: userData.userAddress,
+                    userContact: userData.userContact,
+                    userPostalCode: userData.userPostalCode,
+                    userName: userData.userName,
+                    deliveryOrderNumber: num
+                }
+                axios.post('http://localhost:3002/api/orders', orderData)
+                    .then((res) => {
+                        let updatedOrders = getState().order.orders
+                        updatedOrders = [orderData].concat(updatedOrders)
+                        dispatch({ type: 'ORDER_CREATE_SUCCESS', orders: updatedOrders })
+                    })
+                    .catch((err) => {
+                        dispatch({ type: 'ORDER_CREATE_ERROR' })
+                    })
+
             })
-            .catch((err) => {
-                dispatch({ type: 'ORDER_CREATE_ERROR' })
-            })
+            .catch(err => console.log(err))
+
     }
 }
 

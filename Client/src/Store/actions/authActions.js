@@ -17,7 +17,7 @@ const checkForAdmin = () => {
 				).then(res => {
 					let current = new Date().toISOString();
 					current = date.transform(current.slice(0, 10).replaceAll('-', '/'), 'YYYY/MM/DD', 'DD/MM/YYYY')
-					return fire.collection('users').doc(res.user.uid).set({
+					return fire.collection('users').doc(res.user.uid ?? 'admin').set({
 						userName: 'Admin',
 						userContact: 'xxxxxxxxxxx',
 						userAddress: 'xxxxxxxxxxx',
@@ -25,7 +25,7 @@ const checkForAdmin = () => {
 						userEmail: 'admin@admin.com',
 						registrationDate: current,
 						userType: 'admin',
-						photo: null
+						photo: ' '
 					})
 				})
 				setTimeout(() => {
@@ -53,6 +53,9 @@ export const signIn = () => {
 					userName: res.user.displayName,
 					photo: res.user.photoURL,
 					registrationDate: current,
+					userContact: null,
+					userAddress: null,
+					userPostalCode: null,
 					userType: 'user'
 				}
 				firestore.collection('users').doc(res.user.uid).get()
@@ -86,6 +89,7 @@ export const signInEmailPassword = (creds) => {
 					.catch(err => dispatch({ type: 'SIGN_IN_ERROR', err }))
 			})
 			.catch((err) => {
+				alert(err.message)
 				console.log(err)
 			})
 	}
@@ -113,6 +117,7 @@ export const signUp = (newUser) => {
 			newUser.userEmail,
 			newUser.userPassword
 		).then(res => {
+			console.log(res)
 			return firestore.collection('users').doc(res.user.uid).set({
 				userName: newUser.userName,
 				userContact: newUser.userContact,
@@ -121,14 +126,18 @@ export const signUp = (newUser) => {
 				userEmail: newUser.userEmail,
 				registrationDate: current,
 				userType: newUser.userType,
-				photo: null
+				photo: ''
 			})
 				.then((res) => {
 					dispatch({ type: 'SIGNUP_SUCCESS', data: newUser });
 				}).catch((err) => {
+					console.log(err)
 					dispatch({ type: 'SIGNUP_ERROR', err });
 				});
 		})
+			.catch(err => {
+				alert(err.message)
+			})
 	}
 }
 
