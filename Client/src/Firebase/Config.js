@@ -3,7 +3,6 @@ import "firebase/storage";
 import "firebase/firestore";
 import "firebase/auth";
 
-//your config
 const firebaseConfig = {
 	apiKey: "AIzaSyCqrFY2XX0Ys92lxNqwmHt5FgqcMVl6-BI",
 	authDomain: "quikerly-auth.firebaseapp.com",
@@ -17,7 +16,9 @@ firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({
 	timestampsInSnapshots: true,
 });
+const fire = firebase.firestore();
+const auth = firebase.auth();
 const storage = firebase.storage();
 const timeStamp = firebase.firestore.FieldValue.serverTimestamp;
-export { timeStamp, storage, firebaseConfig };
+export { timeStamp, storage, fire, auth, firebaseConfig };
 export default firebase;

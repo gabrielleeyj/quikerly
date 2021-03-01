@@ -16,15 +16,16 @@ function createData(month, noOfOrders) {
 	return { month, noOfOrders };
 }
 
-
 const Chart = ({ orders }) => {
 	const theme = useTheme();
-	const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	if (orders) {
-		const orderDates = orders.map(order => order.deliveryOrder.slice(3, 5))
+		const orderDates = orders.map((order) =>
+			order.orderDate ? order.orderDate.slice(3, 5) : "0"
+		);
 		for (let i = 0; i < orderDates.length; i++) {
-			const el = parseInt(orderDates[i])
-			arr[el]++
+			const el = parseInt(orderDates[i]);
+			arr[el]++;
 		}
 	}
 	const data = [
@@ -39,7 +40,7 @@ const Chart = ({ orders }) => {
 		createData("Sep", arr[9]),
 		createData("Oct", arr[10]),
 		createData("Nov", arr[11]),
-		createData("Dec", arr[12])
+		createData("Dec", arr[12]),
 	];
 	return (
 		<React.Fragment>
@@ -74,12 +75,12 @@ const Chart = ({ orders }) => {
 			</ResponsiveContainer>
 		</React.Fragment>
 	);
-}
+};
 
 const mapStateToProps = (state) => {
 	return {
-		orders: state.order.orders
-	}
-}
+		orders: state.order.orders,
+	};
+};
 
-export default connect(mapStateToProps, null)(Chart)
+export default connect(mapStateToProps, null)(Chart);
