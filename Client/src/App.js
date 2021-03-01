@@ -1,22 +1,22 @@
 import "./App.css";
 import React, { useState } from "react";
 import LandingPage from "./components/WelcomeView/LandingPage";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import SignUp from "./components/WelcomeView/SignUp";
 import SignIn from "./components/WelcomeView/SignIn";
 import ForgotPassword from "./components/WelcomeView/ForgotPassword";
 import Dashboard from "./components/DashboardView/Dashboard";
 import Account from "./components/account/AccountView";
-import Customers from './components/customer/CustomerListView'
-import OrdersView from './components/OrdersView/OrdersView'
-import firebase from './Firebase/Config';
+import Customers from "./components/customer/CustomerListView";
+import OrdersView from "./components/OrdersView/OrdersView";
+import firebase from "./Firebase/Config";
 import { connect } from "react-redux";
 
 function App(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	firebase.auth().onAuthStateChanged((user) => {
 		user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-	})
+	});
 	return (
 		<div className="App">
 			{!isLoggedIn ? (
@@ -42,20 +42,24 @@ function App(props) {
 							path="/forgot-password"
 							render={(props) => <ForgotPassword {...props} />}
 						/>
-						<Redirect from='/' to='/' />
+						<Redirect from="/" to="/" />
 					</Switch>
 				</>
 			) : (
-					<>
-						{isLoggedIn && <Switch>
-							<Route exact path='/dashboard' component={Dashboard} />
-							<Route exact path='/orders' component={OrdersView} />
-							<Route exact path='/profile' component={Account} />
-							{props.userType === 'admin' && <Route exact path='/customers' render={() => <Customers />} />}
-							<Redirect from='/' to='/dashboard' />
-						</Switch>}
-					</>
-				)}
+				<>
+					{isLoggedIn && (
+						<Switch>
+							<Route exact path="/dashboard" component={Dashboard} />
+							<Route exact path="/orders" component={OrdersView} />
+							<Route exact path="/profile" component={Account} />
+							{props.userType === "admin" && (
+								<Route exact path="/customers" render={() => <Customers />} />
+							)}
+							<Redirect from="/" to="/dashboard" />
+						</Switch>
+					)}
+				</>
+			)}
 		</div>
 	);
 }
@@ -63,8 +67,8 @@ function App(props) {
 const mapStateToProps = (state) => {
 	const type = state.auth.userData;
 	return {
-		userType: type ? type.userType : null
-	}
-}
+		userType: type ? type.userType : null,
+	};
+};
 
 export default connect(mapStateToProps, null)(App);
