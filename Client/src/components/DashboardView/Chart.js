@@ -21,7 +21,7 @@ const Chart = ({ orders }) => {
 	const theme = useTheme();
 	const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	if (orders) {
-		const orderDates = orders.map(order => order.deliveryOrder.slice(3, 5))
+		const orderDates = orders.map(order => order.orderDate ? order.orderDate.slice(3, 5) : '0')
 		for (let i = 0; i < orderDates.length; i++) {
 			const el = parseInt(orderDates[i])
 			arr[el]++

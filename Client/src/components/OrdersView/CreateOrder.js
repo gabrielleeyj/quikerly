@@ -24,19 +24,31 @@ const CreateOrder = (props) => {
     const [values, setValues] = useState(originalState);
     const handleSubmit = (e) => {
         e.preventDefault();
-        const arr = Object.values(values)
-        let formFilled = true;
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].length < 1) {
-                formFilled = false;
+        const userValues = Object.values({ ...props.user })
+        let canSubmit = true;
+        for (let i = 0; i < userValues.length; i++) {
+            if (!userValues[i]) {
+                canSubmit = false;
             }
         }
-        if (!formFilled) alert('Form not filled correctly')
-        if (formFilled) {
-            props.create(values)
-            setValues(originalState)
-            props.setCreate(false)
-            props.history.push('/dashboard')
+        if (canSubmit) {
+            const inputValues = Object.values(values)
+            let formFilled = true;
+            for (let i = 0; i < inputValues.length; i++) {
+                if (inputValues[i].length < 1) {
+                    formFilled = false;
+                }
+            }
+            if (!formFilled) alert('Form not filled correctly')
+            if (formFilled) {
+                props.create(values)
+                setValues(originalState)
+                props.setCreate(false)
+                props.history.push('/dashboard')
+            }
+        }
+        else {
+            alert('Your profile is not complete')
         }
     }
     const handleChange = (event) => {
@@ -179,10 +191,16 @@ const CreateOrder = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth.userData
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         create: (data) => dispatch(orderCreate(data))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateOrder);

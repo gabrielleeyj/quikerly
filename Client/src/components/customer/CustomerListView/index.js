@@ -3,7 +3,7 @@ import {
   Box,
   Container,
   makeStyles,
-  
+
 } from '@material-ui/core';
 import Page from '../../Page/Page';
 import Results from './Results';

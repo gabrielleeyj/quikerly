@@ -60,11 +60,11 @@ const OrdersView = (props) => {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const search = clsx(classes.paper, classes.search);
-    const [searchEmail, setSearchEmail] = useState(null)
+    const [searchNumber, setSearchNumber] = useState(null)
     const [create, setCreate] = useState(false)
 
     const handleChange = (e) => {
-        setSearchEmail(e.target.value)
+        setSearchNumber(e.target.value)
     }
 
     return (
@@ -79,14 +79,14 @@ const OrdersView = (props) => {
                         </Grid>
                         {!create &&
                             <>
-                                <Grid key={2} item xs={12} md={4} lg={8} style={{ display: 'flex',justifyContent:'space-around', flexDirection: 'column' }} >
-                                    {!create && <Button style={{width:'150px',marginTop:'40px'}} color='secondary' variant='outlined' onClick={() => setCreate(true)} >Create Order</Button>}
+                                <Grid key={2} item xs={12} md={4} lg={8} style={{ display: 'flex', justifyContent: 'space-around', flexDirection: 'column' }} >
+                                    {!create && <Button style={{ width: '150px', marginTop: '40px' }} color='secondary' variant='outlined' onClick={() => setCreate(true)} >Create Order</Button>}
                                     <Paper className={search} >
                                         <TextField
                                             fullWidth
                                             onChange={handleChange}
                                             name='searchEmail'
-                                            label='Search orders by customers email'
+                                            label='Search by order number'
                                             variant='outlined' />
                                     </Paper>
                                 </Grid>
@@ -97,7 +97,7 @@ const OrdersView = (props) => {
                                 </Grid>
                                 <Grid key={4} item xs={12} lg={12}  >
                                     <Paper className={classes.paper}>
-                                        <Orders searchEmail={searchEmail} />
+                                        <Orders searchNumber={searchNumber} />
                                     </Paper>
                                 </Grid>
                             </>}

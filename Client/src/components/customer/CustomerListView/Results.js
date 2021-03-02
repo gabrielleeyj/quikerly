@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -13,7 +13,7 @@ import {
   TablePagination,
   TableRow,
   Typography,
-  SwipeableDrawer,
+  Drawer,
   makeStyles
 } from '@material-ui/core';
 import getInitials from '../../../utils/getInitials';
@@ -22,15 +22,6 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
     marginRight: theme.spacing(2)
-  },
-  drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: 240,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   }
 }));
 
@@ -88,49 +79,51 @@ const Results = ({ className, customers, orders, ...rest }) => {
                 </TableRow>
               </TableHead>
               {customers && <TableBody>
-                {customers.slice(0, limit).map((customer) => (
-                  <TableRow
-                    hover
-                    onClick={() => handleSelect(customer)}
-                    style={{ cursor: 'default' }}
-                    key={customer.userEmail}
-                  >
-                    <TableCell>
-                      <Box
-                        alignItems="center"
-                        display="flex"
-                      >
-                        <Avatar
-                          className={classes.avatar}
-                          src={customer.photo}
+                {(limit > 0
+                  ? customers.slice(page * limit, page * limit + limit)
+                  : customers).map((customer) => (
+                    <TableRow
+                      hover
+                      onClick={() => handleSelect(customer)}
+                      style={{ cursor: 'default' }}
+                      key={customer.userEmail}
+                    >
+                      <TableCell>
+                        <Box
+                          alignItems="center"
+                          display="flex"
                         >
-                          {getInitials(customer.userName)}
-                        </Avatar>
-                        <Typography
-                          color="textPrimary"
-                          variant="body1"
-                        >
-                          {customer.userName}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      {customer.userEmail}
-                    </TableCell>
-                    <TableCell>
-                      {customer.userAddress}
-                    </TableCell>
-                    <TableCell>
-                      {customer.userPostalCode}
-                    </TableCell>
-                    <TableCell>
-                      {customer.userContact}
-                    </TableCell>
-                    <TableCell>
-                      {customer.registrationDate}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                          <Avatar
+                            className={classes.avatar}
+                            src={customer.photo ? customer.photo : ''}
+                          >
+                            {getInitials(customer.userName)}
+                          </Avatar>
+                          <Typography
+                            color="textPrimary"
+                            variant="body1"
+                          >
+                            {customer.userName}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        {customer.userEmail}
+                      </TableCell>
+                      <TableCell>
+                        {customer.userAddress}
+                      </TableCell>
+                      <TableCell>
+                        {customer.userPostalCode}
+                      </TableCell>
+                      <TableCell>
+                        {customer.userContact}
+                      </TableCell>
+                      <TableCell>
+                        {customer.registrationDate}
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>}
             </Table>
           </Box>
@@ -142,14 +135,15 @@ const Results = ({ className, customers, orders, ...rest }) => {
           onChangeRowsPerPage={handleLimitChange}
           page={page}
           rowsPerPage={limit}
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, { value: customers.length, label: 'All' }]}
         />}
       </Card>
-      <SwipeableDrawer open={open} onClose={() => { setSelectedCustomer(null); setOpen(false) }} anchor='right' variant='temporary' >
+      <Drawer open={open} onClose={() => { setSelectedCustomer(null); setOpen(false) }} anchor='right' variant='temporary' >
         <Typography color='secondary' style={{ fontSize: '1.3em', textAlign: 'center', marginTop: '5vh' }} >Orders placed by {selectedCustomer ? selectedCustomer.userName.toUpperCase() : ''}</Typography>
         <Table key={2} size="medium">
           <TableHead>
             <TableRow>
+              <TableCell>Order Number</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Address</TableCell>
@@ -160,7 +154,8 @@ const Results = ({ className, customers, orders, ...rest }) => {
           {orders && selectedCustomer && <TableBody>
             {orders.filter(order => order.userEmail === selectedCustomer.userEmail).map((row) => (
               <TableRow hover style={{ cursor: 'pointer' }} key={row._id}>
-                {row.deliveryOrder && <TableCell>{row.deliveryOrder}</TableCell>}
+                <TableCell>{row.deliveryOrderNumber}</TableCell>
+                {row.orderDate && <TableCell>{row.orderDate}</TableCell>}
                 <TableCell>{row.userName}</TableCell>
                 <TableCell>{row.userAddress}</TableCell>
                 <TableCell>{row.userContact}</TableCell>
@@ -169,7 +164,7 @@ const Results = ({ className, customers, orders, ...rest }) => {
             ))}
           </TableBody>}
         </Table>
-      </SwipeableDrawer>
+      </Drawer>
     </>
   );
 };

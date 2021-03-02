@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
 
-const imageSchema = new mongoose.Schema({
-    deliveryOrder: {
+const orderSchema = new mongoose.Schema({
+    deliveryOrderNumber: {
+        type: String,
+        required: true
+    },
+    orderDate: {
         type: String,
         required: true
     },
@@ -64,5 +68,5 @@ const imageSchema = new mongoose.Schema({
 
 })
 
-const Order = mongoose.model('Order', imageSchema);
+const Order = mongoose.model('Order', orderSchema);
 module.exports = Order;
