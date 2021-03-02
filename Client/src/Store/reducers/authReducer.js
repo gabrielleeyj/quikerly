@@ -46,6 +46,15 @@ const authReducer = (state = initState, action) => {
 				...state,
 				userData: action.data
 			}
+		case 'GET_PROFILE_SUCCESS':
+			return{
+				...state,
+				userData:action.data
+			}
+		case 'GET_PROFILE_ERROR':
+			return{
+				...state
+			}
 		default:
 			return state
 	}

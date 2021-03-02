@@ -15,22 +15,24 @@ const checkForAdmin = () => {
 					'admin@admin.com',
 					'admin123'
 				).then(res => {
-					let current = new Date().toISOString();
-					current = date.transform(current.slice(0, 10).replaceAll('-', '/'), 'YYYY/MM/DD', 'DD/MM/YYYY')
-					return fire.collection('users').doc(res.user.uid ?? 'admin').set({
-						userName: 'Admin',
-						userContact: 'xxxxxxxxxxx',
-						userAddress: 'xxxxxxxxxxx',
-						userPostalCode: 'xxxxxxxxxxx',
-						userEmail: 'admin@admin.com',
-						registrationDate: current,
-						userType: 'admin',
-						photo: ' '
-					})
+					setTimeout(() => {
+						let current = new Date().toISOString();
+						current = date.transform(current.slice(0, 10).replaceAll('-', '/'), 'YYYY/MM/DD', 'DD/MM/YYYY')
+						fire.collection('users').doc(res.user.uid).set({
+							userName: 'Admin',
+							userContact: 'xxxxxxxxxxx',
+							userAddress: 'xxxxxxxxxxx',
+							userPostalCode: 'xxxxxxxxxxx',
+							userEmail: 'admin@admin.com',
+							registrationDate: current,
+							userType: 'admin',
+							photo: ' '
+						})
+					}, 500)
 				})
 				setTimeout(() => {
 					auth.signOut()
-				}, 1000)
+				}, 2000)
 			}
 		})
 		.catch(err => console.log(err))
@@ -71,7 +73,6 @@ export const signIn = () => {
 							dispatch({ type: 'GOOGLE_LOGIN_SUCCESS', data: res.data() });
 						}
 					})
-
 			})
 			.catch((err) => {
 				dispatch({ type: 'GOOGLE_LOGIN_ERROR', err });
@@ -126,7 +127,7 @@ export const signUp = (newUser) => {
 				userEmail: newUser.userEmail,
 				registrationDate: current,
 				userType: newUser.userType,
-				photo: ''
+				photo: '  '
 			})
 				.then((res) => {
 					dispatch({ type: 'SIGNUP_SUCCESS', data: newUser });
@@ -155,3 +156,18 @@ export const updateProfile = (updatedData) => {
 	}
 }
 
+export const getProfile=()=>{
+	return (dispatch,getState,{getFirebase})=>{
+		const firebase=getFirebase();
+		const uid=getState().firebase.auth.uid;
+		if(uid){
+			firebase.firestore().collection('users').doc(uid).get()
+			.then(res=>{
+				dispatch({type:'GET_PROFILE_SUCCESS', data:res.data() })
+			})
+			.catch(err=>{
+				dispatch({type:'GET_PROFILE_ERROR' })
+			})
+		}
+	}
+}

@@ -6,6 +6,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const database = require('./Database/database');
 const app = express()
+const path = require('path');
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,7 +30,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api/orders/', routes);
 
+// app.use(express.static((__dirname+'/build')));
 
+// app.get('/*', (req, res) => {
+//   res.sendFile(( __dirname+'/build/index.html'));
+// });
 
 const server = http.createServer(app)
 server.listen(app.get('port'), function () {

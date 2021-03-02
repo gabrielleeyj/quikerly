@@ -4,12 +4,12 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyCqrFY2XX0Ys92lxNqwmHt5FgqcMVl6-BI",
-	authDomain: "quikerly-auth.firebaseapp.com",
-	projectId: "quikerly-auth",
-	storageBucket: "quikerly-auth.appspot.com",
-	messagingSenderId: "84797213970",
-	appId: "1:84797213970:web:f37208d0abe669b431b7cb",
+	apiKey: "AIzaSyC-Zb9LGrpObvkTNHFZowJhaJuYn7be3ns",
+	authDomain: "quikerly-5492e.firebaseapp.com",
+	projectId: "quikerly-5492e",
+	storageBucket: "quikerly-5492e.appspot.com",
+	messagingSenderId: "248450128862",
+	appId: "1:248450128862:web:35b22be8c52bd16e341b4f",
 };
 
 firebase.initializeApp(firebaseConfig);

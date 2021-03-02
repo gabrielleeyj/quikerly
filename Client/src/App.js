@@ -11,9 +11,11 @@ import Customers from './components/customer/CustomerListView'
 import OrdersView from './components/OrdersView/OrdersView'
 import firebase from './Firebase/Config';
 import { connect } from "react-redux";
+import { getProfile } from "./Store/actions/authActions";
 
 function App(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	props.getProfile()
 	firebase.auth().onAuthStateChanged((user) => {
 		user ? setIsLoggedIn(true) : setIsLoggedIn(false);
 	})
@@ -67,4 +69,10 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps=(dispatch)=>{
+	return{
+		getProfile:()=>dispatch(getProfile())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
