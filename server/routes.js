@@ -1,22 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const helpers = require('./helpers');
+const helpers = require("./helpers");
 
 router.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader(
+		"Access-Control-Allow-Methods",
+		"GET, POST, OPTIONS, PUT, PATCH, DELETE"
+	);
+	res.setHeader(
+		"Access-Control-Allow-Headers",
+		"X-Requested-With,content-type"
+	);
+	res.setHeader("Access-Control-Allow-Credentials", true);
 
-    next();
+	next();
 });
 
-router.route('/')
-    .get(helpers.getOrders)
-    .post(helpers.createOrder)
+router.route("/").get(helpers.getOrders).post(helpers.createOrder);
 
-router.route('/:orderId')
-    .put(helpers.updateOrder)
+router.route("/:orderId").put(helpers.updateOrder).delete(helpers.deleteOrder);
 
-// end the input stream and allow the process to exit 
+// end the input stream and allow the process to exit
 module.exports = router;
