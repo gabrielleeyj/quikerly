@@ -14,4 +14,5 @@ mongoose.set("useFindAndModify", false);
 module.exports = {
 	connectToMongo,
 	Order,
+	Counter,
 };
