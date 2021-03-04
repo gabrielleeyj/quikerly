@@ -2,17 +2,20 @@ import React from 'react';
 import { ReactComponent as Logo } from "../components/logo.svg";
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Link from '@material-ui/core/Link';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
   title: {
-    display: 'block',
-    fontSize: 2,
+    flex: 1.3,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing(1),
   },
+
   placeholder: toolbarStyles(theme).root,
   toolbar: {
     justifyContent: 'space-between',
@@ -24,7 +27,7 @@ const styles = (theme) => ({
   },
   rightLink: {
     fontSize: 16,
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
     marginLeft: theme.spacing(3),
   },
   linkSecondary: {
@@ -37,43 +40,39 @@ function AppAppBar(props) {
 
   return (
     <div>
-      <AppBar position="fixed" style={{ backgroundColor: "#434d4f" }}>
+      <AppBar position="fixed" style={{backgroundColor:"#fff"}}>
         <Toolbar className={classes.toolbar}>
           <Link
             variant="h6"
             underline="none"
             color="inherit"
             className={classes.title}
-            to="/"
+            href="/"
           >
-            {<Logo />}
+           {<Logo />}
           </Link>
           <div className={classes.right}>
-            <Link
+            <Button 
+              variant="outlined" 
+              color="inherit" 
+              size="medium"
               className={classes.rightLink}
-              to='/sign-in' >
-              <Button
-                variant="outlined"
-                color="inherit"
-              >
-                Sign In
+              href="/sign-in">
+              Sign In
             </Button>
-            </Link>
-            <Link
+            <Button 
+              variant="contained" 
+              color="secondary" 
+              disableElevation
+              size="medium"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              to='/sign-up' >
-              <Button
-                variant="contained"
-                color="secondary"
-                disableElevation
-              >
-                Sign Up
+              href="/sign-up">
+              Sign Up
             </Button>
-            </Link>
           </div>
         </Toolbar>
       </AppBar>
-
+                
       <div className={classes.placeholder} />
     </div>
   );
