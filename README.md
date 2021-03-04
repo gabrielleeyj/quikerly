@@ -4,6 +4,7 @@
 [![Read the Docs](https://readthedocs.org/projects/docs/badge/?version=latest)](https://www.notion.so/01f5e6cf3f054869955b6fcc8a7de57d?v=93063432a861438a80736ebacff62a76)<br/>
 
 Tech Stack - <br/>
+Authentication & User: Firebase<br/>
 FrontEnd: ReactJS with Libraries<br/>
 BackEnd: ExpressJS/NodeJS with Libraries<br/>
 Database: MongoDB Atlas<br/>
