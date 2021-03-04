@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Title from "./Title";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { connect } from 'react-redux'
-import { getOrders, updateOrder } from '../../Store/actions/orderActions'
+import { deleteOrder, getOrders, updateOrder } from '../../Store/actions/orderActions'
 import { Box, Button, Grid, MenuItem, TablePagination, Modal, Paper, Select, TextField, Typography } from "@material-ui/core";
 
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const Orders = ({ rows, getOrders, userData, updateOrder, searchNumber }) => {
+const Orders = ({ rows, getOrders, userData, updateOrder, searchNumber, deleteOrder }) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false)
 	const [edit, setEdit] = useState(false)
@@ -67,12 +67,19 @@ const Orders = ({ rows, getOrders, userData, updateOrder, searchNumber }) => {
 	const handleEdit = () => {
 		setEdit(true)
 	}
+	const handleDelete = () => {
+		deleteOrder(selectedOrder._id)
+		setTimeout(() => {
+			getOrders()
+			setOpen(false)
+		}, 700)
+	}
 	useEffect(() => {
 		getOrders()
 	}, [userData])
 
 	if (searchNumber) {
-		rows = rows.filter((row) => (row.deliveryOrderNumber) === (searchNumber))
+		rows = rows.filter((row) => (row.deliveryOrderNumber).includes(searchNumber))
 	}
 
 	return (
@@ -183,10 +190,14 @@ const Orders = ({ rows, getOrders, userData, updateOrder, searchNumber }) => {
 								</TableRow>
 							</TableBody>
 						</Table>
-						{userData.userType === 'admin' && <div style={{ display: 'flex' }} >
-							<Button onClick={handleUpdate} fullWidth color='secondary' variant='contained' >Save</Button>
-							<Button onClick={handleEdit} fullWidth color='secondary' variant='contained' >Edit</Button>
-						</div>}
+						{userData.userType === 'admin' &&
+							<div style={{ display: 'flex', marginBottom: '15px' }} >
+								<Button onClick={handleUpdate} fullWidth color='secondary' variant='contained' >Save</Button>
+								<Button onClick={handleEdit} fullWidth color='secondary' variant='contained' >Edit</Button>
+							</div>
+						}
+						<Button onClick={handleDelete} color='secondary' variant='outlined' >Delete</Button>
+
 					</Paper>
 				</Grid>
 			</Modal>}
@@ -202,7 +213,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getOrders: () => dispatch(getOrders()),
-		updateOrder: (order, order_id) => dispatch(updateOrder(order, order_id))
+		updateOrder: (order, order_id) => dispatch(updateOrder(order, order_id)),
+		deleteOrder: (orderId) => dispatch(deleteOrder(orderId))
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

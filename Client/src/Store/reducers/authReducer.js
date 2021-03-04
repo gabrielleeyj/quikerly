@@ -1,4 +1,5 @@
 const initState = {
+	userData: null,
 	authError: null
 }
 
@@ -47,12 +48,12 @@ const authReducer = (state = initState, action) => {
 				userData: action.data
 			}
 		case 'GET_PROFILE_SUCCESS':
-			return{
+			return {
 				...state,
-				userData:action.data
+				userData: action.data
 			}
 		case 'GET_PROFILE_ERROR':
-			return{
+			return {
 				...state
 			}
 		default:

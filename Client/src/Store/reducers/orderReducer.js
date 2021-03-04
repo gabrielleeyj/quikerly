@@ -1,5 +1,6 @@
 const initState = {
-
+    orders: null,
+    err: null
 }
 
 const orderReducer = (state = initState, action) => {
@@ -7,11 +8,11 @@ const orderReducer = (state = initState, action) => {
         case 'ORDER_CREATE_ERROR':
             return {
                 ...state,
+                err: action.err
             }
         case 'ORDER_CREATE_SUCCESS':
             return {
                 ...state,
-                orders: action.orders
             }
         case 'GET_ORDERS_SUCCESS':
             return {
@@ -20,7 +21,8 @@ const orderReducer = (state = initState, action) => {
             };
         case 'GET_ORDERS_ERROR':
             return {
-                ...state
+                ...state,
+                err: action.err
             }
         case 'UPDATE_ORDER_SUCCESS':
             return {
@@ -29,7 +31,15 @@ const orderReducer = (state = initState, action) => {
             }
         case 'UPDATE_ORDER_ERROR':
             return {
-                ...state
+                ...state,
+                err: action.err
+            }
+        case 'DELETE_ORDER_SUCCESS':
+            return state
+        case 'DELETE_ORDER_ERR':
+            return {
+                ...state,
+                err: action.err
             }
         case 'CLEAN_ORDERS':
             return {

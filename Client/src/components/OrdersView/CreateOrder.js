@@ -9,7 +9,7 @@ import {
     Grid,
     TextField
 } from '@material-ui/core';
-import { orderCreate } from '../../Store/actions/orderActions';
+import { getOrders, orderCreate } from '../../Store/actions/orderActions';
 import { connect } from 'react-redux';
 
 const CreateOrder = (props) => {
@@ -42,6 +42,9 @@ const CreateOrder = (props) => {
             if (!formFilled) alert('Form not filled correctly')
             if (formFilled) {
                 props.create(values)
+                setTimeout(() => {
+                    props.getOrders()
+                }, 1200);
                 setValues(originalState)
                 props.setCreate(false)
                 props.history.push('/dashboard')
@@ -199,7 +202,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        create: (data) => dispatch(orderCreate(data))
+        create: (data) => dispatch(orderCreate(data)),
+        getOrders: () => dispatch(getOrders())
     }
 }
 

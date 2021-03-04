@@ -1,4 +1,7 @@
-const initState = {}
+const initState = {
+    customers: null,
+    err: null
+}
 const customerReducer = (state = initState, action) => {
     switch (action.type) {
         case 'GET_CUSTOMERS_SUCCESS':
