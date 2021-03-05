@@ -115,6 +115,8 @@ const OrdersView = (props) => {
 											display: "flex",
 											justifyContent: "space-around",
 											flexDirection: "column",
+											paddingTop: "20px",
+											marginTop: "20px",
 										}}
 									>
 										<Paper className={search}>
@@ -127,7 +129,8 @@ const OrdersView = (props) => {
 											/>
 										</Paper>
 									</Grid>
-									<Grid item xs={12} md={6} lg={3}>
+									<Grid item lg={3} md={1}></Grid>
+									<Grid item xs={12} md={5} lg={3}>
 										<Paper className={fixedHeightPaper}>
 											<Deposits />
 										</Paper>
