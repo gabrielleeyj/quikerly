@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "MAGES capstone project (MVP)",
   "main": "index.js",
+  "engines": {
+      "node": "14.x"
+  },
   "scripts": {
     "install-all": "concurrently \"npm install\" \"cd client && npm install\"",
     "client": "cd client && npm start",
