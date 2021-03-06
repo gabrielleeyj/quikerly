@@ -33,7 +33,6 @@
     "express": "^4.8.0",
     "express-session": "^1.7.2",
     "method-override": "^2.1.2",
-    "mongoose": "^5.11.9",
-    "react-scripts":"^4.0.3"
+    "mongoose": "^5.11.9"
   }
 }
