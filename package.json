@@ -2,7 +2,7 @@
   "name": "quikerly",
   "version": "1.0.0",
   "description": "MAGES capstone project (MVP)",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
       "node": "14.x"
   },
