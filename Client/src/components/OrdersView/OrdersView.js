@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingBottom: theme.spacing(3),
 	},
 	top: {
-		paddingTop: theme.spacing(10),
+		paddingTop: theme.spacing(3),
 	},
 	content: {
 		flexGrow: 1,
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 	},
 	fixedHeight: {
-		height: 240,
+		height: 150,
 	},
 	search: {
 		height: 90,
@@ -67,8 +67,8 @@ const useStyles = makeStyles((theme) => ({
 		height: "100px",
 	},
 	btn: {
-		width: "150px",
-		marginTop: "20px",
+		width: "365px",
+		marginTop: "23px",
 	},
 	csv: {
 		width: "100%",
@@ -123,38 +123,35 @@ const OrdersView = (props) => {
 									<CreateOrder history={props.history} setCreate={setCreate} />
 								)}
 							</Grid>
-							<Paper className={fixedHeightPaper}>
-								<Button
-									className={classes.btn}
-									color="secondary"
-									variant="outlined"
-								>
-									<CSVLink className={classes.csv} {...csvReport}>
-										Export To CSV
-									</CSVLink>
-								</Button>
-								<Button
-									className={classes.btn}
-									color="secondary"
-									variant="outlined"
-									onClick={() => setCreate(true)}
-								>
-									Create Order
-								</Button>
-							</Paper>
 							{!create && (
 								<>
-									<Grid
-										item
-										xs={12}
-										md={4}
-										lg={8}
-										style={{
-											display: "flex",
-											justifyContent: "space-around",
-											flexDirection: "column",
-										}}
-									>
+									<Grid item xs={12} md={9} lg={9}>
+										<Paper className={classes.paper}>
+											<Button
+												className={classes.btn}
+												color="secondary"
+												variant="outlined"
+											>
+												<CSVLink className={classes.csv} {...csvReport}>
+													Export To CSV
+												</CSVLink>
+											</Button>
+											<Button
+												className={classes.btn}
+												color="secondary"
+												variant="outlined"
+												onClick={() => setCreate(true)}
+											>
+												Create Order
+											</Button>
+										</Paper>
+									</Grid>
+									<Grid item xs={12} md={4} lg={3}>
+										<Paper className={fixedHeightPaper}>
+											<Deposits />
+										</Paper>
+									</Grid>
+									<Grid item xs={12} md={12} lg={12}>
 										<Paper className={search}>
 											<TextField
 												fullWidth
@@ -165,12 +162,8 @@ const OrdersView = (props) => {
 											/>
 										</Paper>
 									</Grid>
-									<Grid item xs={12} md={4} lg={4}>
-										<Paper className={fixedHeightPaper}>
-											<Deposits />
-										</Paper>
-									</Grid>
-									<Grid item xs={12} lg={12}>
+
+									<Grid item xs={12} md={12} lg={12}>
 										<Paper className={classes.paper}>
 											<Orders searchNumber={searchNumber} />
 										</Paper>
