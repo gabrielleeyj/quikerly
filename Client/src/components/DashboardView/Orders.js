@@ -63,7 +63,7 @@ const Orders = ({
 		selectTo: null,
 	});
 	const admin = userData.userType === "admin";
-	const user = userData.userType === "user";
+	const customer = userData.userType === "user";
 
 	const handleLimitChange = (event) => {
 		setLimit(event.target.value);
@@ -97,7 +97,7 @@ const Orders = ({
 			};
 			updateOrder(update, selectedOrder._id);
 		}
-		if (user) {
+		if (customer) {
 			const update = {
 				recipientName: document.getElementById("recipientName").value,
 				recipientContact: document.getElementById("recipientContact").value,
@@ -277,7 +277,7 @@ const Orders = ({
 									<TableRow key={4} hover>
 										<TableCell>Recipient Name</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (admin || customer) ? (
 												<TextField
 													name="recipientName"
 													id="recipientName"
@@ -291,7 +291,7 @@ const Orders = ({
 									<TableRow key={5} hover>
 										<TableCell>Recipient Contact</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (admin || customer) ? (
 												<TextField
 													name="recipientContact"
 													id="recipientContact"
@@ -305,7 +305,7 @@ const Orders = ({
 									<TableRow key={6} hover>
 										<TableCell>Recipient Address</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (admin || customer) ? (
 												<TextField
 													name="recipientAddress"
 													id="recipientAddress"
@@ -319,7 +319,7 @@ const Orders = ({
 									<TableRow key={7} hover>
 										<TableCell>Recipient Postal Code</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (admin || customer) ? (
 												<TextField
 													name="recipientPostalCode"
 													id="recipientPostalCode"
@@ -333,7 +333,7 @@ const Orders = ({
 									<TableRow key={8} hover>
 										<TableCell>Instructions</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (admin || customer) ? (
 												<TextField
 													name="instructions"
 													id="instructions"
@@ -347,7 +347,7 @@ const Orders = ({
 									<TableRow key={9} hover>
 										<TableCell>Pickup Time</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (admin || customer) ? (
 												<TextField
 													name="pickupTime"
 													id="pickupTime"

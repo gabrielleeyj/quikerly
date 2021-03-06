@@ -118,15 +118,33 @@ const OrdersView = (props) => {
 				<div className={classes.top}>
 					<Container maxWidth="lg" className={classes.container} lg={12}>
 						<Grid container spacing={3}>
-							<Grid key={1} item xs={12} md={8} lg={9}>
+							<Grid item xs={12} md={8} lg={9}>
 								{create && (
 									<CreateOrder history={props.history} setCreate={setCreate} />
 								)}
 							</Grid>
+							<Paper className={fixedHeightPaper}>
+								<Button
+									className={classes.btn}
+									color="secondary"
+									variant="outlined"
+								>
+									<CSVLink className={classes.csv} {...csvReport}>
+										Export To CSV
+									</CSVLink>
+								</Button>
+								<Button
+									className={classes.btn}
+									color="secondary"
+									variant="outlined"
+									onClick={() => setCreate(true)}
+								>
+									Create Order
+								</Button>
+							</Paper>
 							{!create && (
 								<>
 									<Grid
-										key={2}
 										item
 										xs={12}
 										md={4}
@@ -137,25 +155,6 @@ const OrdersView = (props) => {
 											flexDirection: "column",
 										}}
 									>
-										<Box className={classes.box}>
-											<Button
-												className={classes.btn}
-												color="secondary"
-												variant="outlined"
-											>
-												<CSVLink className={classes.csv} {...csvReport}>
-													Export To CSV
-												</CSVLink>
-											</Button>
-											<Button
-												className={classes.btn}
-												color="secondary"
-												variant="outlined"
-												onClick={() => setCreate(true)}
-											>
-												Create Order
-											</Button>
-										</Box>
 										<Paper className={search}>
 											<TextField
 												fullWidth
@@ -166,12 +165,12 @@ const OrdersView = (props) => {
 											/>
 										</Paper>
 									</Grid>
-									<Grid key={3} item xs={12} md={4} lg={4}>
+									<Grid item xs={12} md={4} lg={4}>
 										<Paper className={fixedHeightPaper}>
 											<Deposits />
 										</Paper>
 									</Grid>
-									<Grid key={4} item xs={12} lg={12}>
+									<Grid item xs={12} lg={12}>
 										<Paper className={classes.paper}>
 											<Orders searchNumber={searchNumber} />
 										</Paper>
