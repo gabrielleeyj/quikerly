@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingBottom: theme.spacing(3),
 	},
 	top: {
-		paddingTop: theme.spacing(10),
+		paddingTop: theme.spacing(3),
 	},
 	content: {
 		flexGrow: 1,
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: "column",
 	},
 	fixedHeight: {
-		height: 240,
+		height: 150,
 	},
 	search: {
 		height: 90,
@@ -67,8 +67,8 @@ const useStyles = makeStyles((theme) => ({
 		height: "100px",
 	},
 	btn: {
-		width: "150px",
-		marginTop: "20px",
+		width: "365px",
+		marginTop: "23px",
 	},
 	csv: {
 		width: "100%",
@@ -118,26 +118,15 @@ const OrdersView = (props) => {
 				<div className={classes.top}>
 					<Container maxWidth="lg" className={classes.container} lg={12}>
 						<Grid container spacing={3}>
-							<Grid key={1} item xs={12} md={8} lg={9}>
+							<Grid item xs={12} md={8} lg={9}>
 								{create && (
 									<CreateOrder history={props.history} setCreate={setCreate} />
 								)}
 							</Grid>
 							{!create && (
 								<>
-									<Grid
-										key={2}
-										item
-										xs={12}
-										md={4}
-										lg={8}
-										style={{
-											display: "flex",
-											justifyContent: "space-around",
-											flexDirection: "column",
-										}}
-									>
-										<Box className={classes.box}>
+									<Grid item xs={12} md={9} lg={9}>
+										<Paper className={classes.paper}>
 											<Button
 												className={classes.btn}
 												color="secondary"
@@ -155,7 +144,14 @@ const OrdersView = (props) => {
 											>
 												Create Order
 											</Button>
-										</Box>
+										</Paper>
+									</Grid>
+									<Grid item xs={12} md={4} lg={3}>
+										<Paper className={fixedHeightPaper}>
+											<Deposits />
+										</Paper>
+									</Grid>
+									<Grid item xs={12} md={12} lg={12}>
 										<Paper className={search}>
 											<TextField
 												fullWidth
@@ -166,12 +162,8 @@ const OrdersView = (props) => {
 											/>
 										</Paper>
 									</Grid>
-									<Grid key={3} item xs={12} md={4} lg={4}>
-										<Paper className={fixedHeightPaper}>
-											<Deposits />
-										</Paper>
-									</Grid>
-									<Grid key={4} item xs={12} lg={12}>
+
+									<Grid item xs={12} md={12} lg={12}>
 										<Paper className={classes.paper}>
 											<Orders searchNumber={searchNumber} />
 										</Paper>

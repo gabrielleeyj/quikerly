@@ -62,9 +62,14 @@ const Orders = ({
 		selectFrom: null,
 		selectTo: null,
 	});
-	const admin = userData.userType === "admin";
-	const user = userData.userType === "user";
 
+	const userRole = (userData) => {
+		if (!userData) {
+			return null;
+		}
+		const user = userData.userType;
+		return user;
+	};
 	const handleLimitChange = (event) => {
 		setLimit(event.target.value);
 	};
@@ -82,7 +87,7 @@ const Orders = ({
 		setEdit(false);
 	};
 	const handleUpdate = () => {
-		if (admin) {
+		if (userRole === "admin") {
 			const update = {
 				recipientName: document.getElementById("recipientName").value,
 				recipientContact: document.getElementById("recipientContact").value,
@@ -97,7 +102,7 @@ const Orders = ({
 			};
 			updateOrder(update, selectedOrder._id);
 		}
-		if (user) {
+		if (userRole === "user") {
 			const update = {
 				recipientName: document.getElementById("recipientName").value,
 				recipientContact: document.getElementById("recipientContact").value,
@@ -277,7 +282,7 @@ const Orders = ({
 									<TableRow key={4} hover>
 										<TableCell>Recipient Name</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (userRole === "admin" || "user") ? (
 												<TextField
 													name="recipientName"
 													id="recipientName"
@@ -291,7 +296,7 @@ const Orders = ({
 									<TableRow key={5} hover>
 										<TableCell>Recipient Contact</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (userRole === "admin" || "user") ? (
 												<TextField
 													name="recipientContact"
 													id="recipientContact"
@@ -305,7 +310,7 @@ const Orders = ({
 									<TableRow key={6} hover>
 										<TableCell>Recipient Address</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (userRole === "admin" || "user") ? (
 												<TextField
 													name="recipientAddress"
 													id="recipientAddress"
@@ -319,7 +324,7 @@ const Orders = ({
 									<TableRow key={7} hover>
 										<TableCell>Recipient Postal Code</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (userRole === "admin" || "user") ? (
 												<TextField
 													name="recipientPostalCode"
 													id="recipientPostalCode"
@@ -333,7 +338,7 @@ const Orders = ({
 									<TableRow key={8} hover>
 										<TableCell>Instructions</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (userRole === "admin" || "user") ? (
 												<TextField
 													name="instructions"
 													id="instructions"
@@ -347,7 +352,7 @@ const Orders = ({
 									<TableRow key={9} hover>
 										<TableCell>Pickup Time</TableCell>
 										<TableCell>
-											{edit && (admin || user) ? (
+											{edit && (userRole === "admin" || "user") ? (
 												<TextField
 													name="pickupTime"
 													id="pickupTime"
@@ -361,7 +366,7 @@ const Orders = ({
 									<TableRow key={10} hover>
 										<TableCell>Cost</TableCell>
 										<TableCell>
-											{edit && admin ? (
+											{edit && userRole === "admin" ? (
 												<TextField
 													name="cost"
 													id="cost"
@@ -375,7 +380,7 @@ const Orders = ({
 									<TableRow key={11} hover>
 										<TableCell>Driver</TableCell>
 										<TableCell>
-											{edit && admin ? (
+											{edit && userRole === "admin" ? (
 												<TextField
 													name="driver"
 													id="driver"
@@ -389,7 +394,7 @@ const Orders = ({
 									<TableRow key={12} hover>
 										<TableCell>Status</TableCell>
 										<TableCell>
-											{edit && admin ? (
+											{edit && userRole === "admin" ? (
 												<Select
 													fullWidth
 													name="status"
@@ -409,7 +414,6 @@ const Orders = ({
 									</TableRow>
 								</TableBody>
 							</Table>
-							{/* {userData.userType === "admin" && ( */}
 							<Box style={{ display: "flex", marginBottom: "15px" }}>
 								<Button
 									onClick={handleUpdate}
@@ -428,7 +432,6 @@ const Orders = ({
 									Edit
 								</Button>
 							</Box>
-							{/* )} */}
 							<Button
 								onClick={handleDelete}
 								color="secondary"
