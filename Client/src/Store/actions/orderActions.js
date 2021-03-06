@@ -84,6 +84,35 @@ export const deleteOrder = (orderId) => {
     }
 }
 
+export const selectedOrders = (selectFrom, selectTo) => {
+    return (dispatch, getState) => {
+        axios.get('http://localhost:3002/api/orders')
+            .then(res => {
+                let currentOrdersList = res.data
+                const selectYears = [selectFrom.slice(6, 10), selectTo.slice(6, 10)]
+                const selectMonths = [selectFrom.slice(3, 5), selectTo.slice(3, 5)]
+                const selectDays = [selectFrom.slice(0, 2), selectTo.slice(0, 2)]
+                currentOrdersList = currentOrdersList.filter((order) => {
+                    const orderYear = order.orderDate.slice(6, 10)
+                    const orderMonth = order.orderDate.slice(3, 5)
+                    const orderDay = order.orderDate.slice(0, 2)
+                    if (orderYear >= selectYears[0] && orderYear <= selectYears[1])
+                        if (orderMonth >= selectMonths[0] && orderMonth <= selectMonths[1])
+                            if (orderDay >= selectDays[0] && orderDay <= selectDays[1])
+                                return true
+                            else
+                                return false
+                        else
+                            return false
+                    else
+                        return false
+                })
+                dispatch({ type: 'ORDERS_SELECTED', orders: currentOrdersList })
+            })
+    }
+}
+
+
 export const cleanOrders = () => {
     return (dispatch, getState) => {
         dispatch({ type: 'CLEAN_ORDERS' })

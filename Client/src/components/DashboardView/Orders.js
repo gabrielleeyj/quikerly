@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import {
 	deleteOrder,
 	getOrders,
+	selectedOrders,
 	updateOrder,
 } from "../../Store/actions/orderActions";
 import {
@@ -26,6 +27,8 @@ import {
 	TextField,
 	Typography,
 } from "@material-ui/core";
+import date from "date-and-time";
+import { CSVLink } from "react-csv";
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -46,6 +49,7 @@ const Orders = ({
 	updateOrder,
 	searchNumber,
 	deleteOrder,
+	selectOrders,
 }) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
@@ -54,8 +58,13 @@ const Orders = ({
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 	const [limit, setLimit] = useState(5);
 	const [page, setPage] = useState(0);
+	const [select, setSelect] = useState({
+		selectFrom: null,
+		selectTo: null,
+	});
 	const admin = userData.userType === "admin";
 	const user = userData.userType === "user";
+
 	const handleLimitChange = (event) => {
 		setLimit(event.target.value);
 	};
@@ -122,17 +131,73 @@ const Orders = ({
 		rows = rows.filter((row) => row.deliveryOrderNumber.includes(searchNumber));
 	}
 
+	const handleChange = (e) => {
+		let val = e.target.value.replaceAll("-", "/");
+		val = date.transform(val, "YYYY/MM/DD", "DD/MM/YYYY");
+		setSelect({
+			...select,
+			[e.target.id]: val,
+		});
+	};
+	const filter = () => {
+		if (select.selectTo.slice(6, 10) >= select.selectFrom.slice(6, 10))
+			if (select.selectTo.slice(3, 5) >= select.selectFrom.slice(3, 5))
+				if (select.selectTo.slice(0, 2) >= select.selectFrom.slice(0, 2))
+					selectOrders(select.selectFrom, select.selectTo);
+				else alert("Please Select A Valid Interval");
+			else alert("Please Select A Valid Interval");
+		else alert("Please Select A Valid Interval");
+	};
 	return (
 		<React.Fragment>
-			<Title key={1}>Recent Orders</Title>
-
+			<Box style={{ display: "flex", justifyContent: "space-between" }}>
+				<Box
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						width: "33%",
+					}}
+				>
+					<TextField
+						id="selectFrom"
+						label="Select From"
+						type="date"
+						onChange={handleChange}
+						InputLabelProps={{
+							shrink: true,
+						}}
+					/>
+					<TextField
+						id="selectTo"
+						onChange={handleChange}
+						label="Select To"
+						type="date"
+						InputLabelProps={{
+							shrink: true,
+						}}
+					/>
+				</Box>
+				<Box style={{ marginRight: "150px" }}>
+					<Title key={1}>Recent Orders</Title>
+				</Box>
+				<Box style={{ width: "130px" }}>
+					<Button
+						color="secondary"
+						fullWidth
+						variant="outlined"
+						onClick={filter}
+					>
+						Filter
+					</Button>
+				</Box>
+			</Box>
 			<PerfectScrollbar>
 				<Box minWidth={1050}>
 					<Table key={2} size="small">
 						<TableHead>
 							<TableRow>
 								<TableCell>Order Number</TableCell>
-								<TableCell>Date</TableCell>
+								<TableCell>Date (ISO)</TableCell>
 								<TableCell>Name</TableCell>
 								<TableCell>Address</TableCell>
 								<TableCell>Contact</TableCell>
@@ -345,7 +410,7 @@ const Orders = ({
 								</TableBody>
 							</Table>
 							{/* {userData.userType === "admin" && ( */}
-							<div style={{ display: "flex", marginBottom: "15px" }}>
+							<Box style={{ display: "flex", marginBottom: "15px" }}>
 								<Button
 									onClick={handleUpdate}
 									fullWidth
@@ -362,7 +427,7 @@ const Orders = ({
 								>
 									Edit
 								</Button>
-							</div>
+							</Box>
 							{/* )} */}
 							<Button
 								onClick={handleDelete}
@@ -389,6 +454,8 @@ const mapDispatchToProps = (dispatch) => {
 		getOrders: () => dispatch(getOrders()),
 		updateOrder: (order, order_id) => dispatch(updateOrder(order, order_id)),
 		deleteOrder: (orderId) => dispatch(deleteOrder(orderId)),
+		selectOrders: (selectFrom, selectTo) =>
+			dispatch(selectedOrders(selectFrom, selectTo)),
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);
