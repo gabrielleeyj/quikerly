@@ -35,11 +35,18 @@ const orderReducer = (state = initState, action) => {
                 err: action.err
             }
         case 'DELETE_ORDER_SUCCESS':
-            return state
+            return {
+                ...state
+            }
         case 'DELETE_ORDER_ERR':
             return {
                 ...state,
                 err: action.err
+            }
+        case 'ORDERS_SELECTED':
+            return {
+                ...state,
+                orders: action.orders
             }
         case 'CLEAN_ORDERS':
             return {
