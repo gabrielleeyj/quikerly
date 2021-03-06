@@ -37,10 +37,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/orders/", routes);
 
-app.use(express.static(__dirname + "../build"));
+app.use(express.static(__dirname + "../Client/build"));
 
-app.get("/*", (req, res) => {
-	res.sendFile(__dirname + "../build/index.html");
+app.get("*", (req, res) => {
+	res.sendFile(__dirname + "../Client/build/index.html");
 });
 
 const server = http.createServer(app);
