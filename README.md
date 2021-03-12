@@ -1,6 +1,6 @@
 ## Quikerly - Dispatch Management System
 
-[![Generic badge](https://img.shields.io/badge/progress-Live-Green.svg)](https://www.notion.so/86e64edc90c44900ab926c68435ef4cd?v=a443bc9b029941eba3daefbf38726dc4) &nbsp;
+[![Generic badge](https://img.shields.io/badge/progress-Closed-Red.svg)](https://www.notion.so/86e64edc90c44900ab926c68435ef4cd?v=a443bc9b029941eba3daefbf38726dc4) &nbsp;
 [![Read the Docs](https://readthedocs.org/projects/docs/badge/?version=latest)](https://www.notion.so/01f5e6cf3f054869955b6fcc8a7de57d?v=93063432a861438a80736ebacff62a76)<br/>
 
 Tech Stack - <br/>
