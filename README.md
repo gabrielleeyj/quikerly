@@ -27,4 +27,8 @@ Once done, to start the server.<br/>
 
 yarn start / npm start<br/>
 
-![Login Page](images/LoginPage.png?raw=true "Login")
+![Login Page](images/Login.png?raw=true "Login")
+![Dashboard](images/Dashboard.png?raw=true "Dashboard")
+![Orders Page](images/OrdersPage.png?raw=true "Orders")
+![Create Order Page](images/CreateOrder.png?raw=true "Create Order")
+![Profie](images/Profile.png?raw=true "Profile")
