@@ -31,4 +31,5 @@ yarn start / npm start<br/>
 ![Dashboard](images/Dashboard.png?raw=true "Dashboard")
 ![Orders Page](images/OrdersPage.png?raw=true "Orders")
 ![Create Order Page](images/CreateOrder.png?raw=true "Create Order")
-![Profie](images/Profile.png?raw=true "Profile")
+![Customer Page](images/CustomerPage.png?raw=true "Customer List Page")
+![Profile](images/ProfilePage.png?raw=true "Profile")
