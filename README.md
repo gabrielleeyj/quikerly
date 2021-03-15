@@ -27,3 +27,4 @@ Once done, to start the server.<br/>
 
 yarn start / npm start<br/>
 
+![Login Page](images/LoginPage.png?raw=true "Login")
